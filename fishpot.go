@@ -1,14 +1,19 @@
+// terminal-animation/fishpot.go
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"os/exec"
+)
 
 type Fishpot struct {
 	Width  int
 	Height int
-	Fish   *Fish
+	Fish   []*Fish
 }
 
-func NewFishpot(width, height int, fish *Fish) *Fishpot {
+func NewFishpot(width, height int, fish []*Fish) *Fishpot {
 	return &Fishpot{
 		Width:  width,
 		Height: height,
@@ -17,19 +22,14 @@ func NewFishpot(width, height int, fish *Fish) *Fishpot {
 }
 
 func (fp *Fishpot) FlushTerminal() {
-	fmt.Print("\033[H\033[2J")
+	cmd := exec.Command("clear")
+	cmd.Stdout = os.Stdout
+	cmd.Run()
 }
 
 func (fp *Fishpot) Draw() {
-	for i := 0; i < fp.Height; i++ {
-		for j := 0; j < fp.Width; j++ {
-			if i == fp.Fish.VerticalPos && j == fp.Fish.HorizontalPos {
-				fmt.Print(fp.Fish.GetFishString())
-				j += len(fp.Fish.GetFishString()) - 1 // Skip the length of the fish
-			} else {
-				fmt.Print(" ")
-			}
-		}
-		fmt.Println()
+	for _, fish := range fp.Fish {
+		fmt.Printf("\033[%d;%dH%s", fish.VerticalPos+1, fish.HorizontalPos+1, fish.GetFishString())
 	}
+	fmt.Printf("\033[%d;%dH", fp.Height+2, 0) // Move cursor to the bottom after drawing
 }

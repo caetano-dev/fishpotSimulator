@@ -19,13 +19,21 @@ func main() {
 	width -= 2
 	height -= 2
 
-	fish := NewFish(width, height)
+	// Create multiple fish
+	numFish := 5
+	fish := make([]*Fish, numFish)
+	for i := 0; i < numFish; i++ {
+		fish[i] = NewFish(width, height)
+	}
+
 	fishpot := NewFishpot(width, height, fish)
 
 	for {
 		fishpot.FlushTerminal()
 		fishpot.Draw()
 		time.Sleep(200 * time.Millisecond)
-		fish.Move()
+		for _, fish := range fish {
+			fish.Move()
+		}
 	}
 }

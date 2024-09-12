@@ -21,8 +21,8 @@ type Fish struct {
 func NewFish(width, height int) *Fish {
 	rand.NewSource(time.Now().UnixNano())
 	return &Fish{
-		HorizontalPos: 0,
-		VerticalPos:   height / 2,
+		HorizontalPos: rand.Intn(width),
+		VerticalPos:   rand.Intn(height),
 		Direction:     "right",
 		Width:         width,
 		Height:        height,
