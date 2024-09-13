@@ -1,4 +1,4 @@
-module animation
+module fishpot_simulator
 
 go 1.22.2
 

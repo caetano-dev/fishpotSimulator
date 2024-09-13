@@ -5,6 +5,9 @@ import (
 	"os"
 	"time"
 
+	f "fishpot_simulator/fish"
+	fp "fishpot_simulator/fishpot"
+
 	"golang.org/x/term"
 )
 
@@ -21,12 +24,12 @@ func main() {
 
 	// Create multiple fish
 	numFish := 5
-	fish := make([]*Fish, numFish)
+	fish := make([]*f.Fish, numFish)
 	for i := 0; i < numFish; i++ {
-		fish[i] = NewFish(width, height)
+		fish[i] = f.NewFish(width, height)
 	}
 
-	fishpot := NewFishpot(width, height, fish)
+	fishpot := fp.NewFishpot(width, height, fish)
 
 	for {
 		fishpot.FlushTerminal()

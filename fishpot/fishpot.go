@@ -1,6 +1,8 @@
-package main
+package fishpot
 
 import (
+	b "fishpot_simulator/bubble"
+	f "fishpot_simulator/fish"
 	"fmt"
 	"math/rand"
 	"os"
@@ -10,16 +12,16 @@ import (
 type Fishpot struct {
 	Width   int
 	Height  int
-	Fish    []*Fish
-	Bubbles []*Bubble
+	Fish    []*f.Fish
+	Bubbles []*b.Bubble
 }
 
-func NewFishpot(width, height int, fish []*Fish) *Fishpot {
+func NewFishpot(width, height int, fish []*f.Fish) *Fishpot {
 	return &Fishpot{
 		Width:   width,
 		Height:  height,
 		Fish:    fish,
-		Bubbles: []*Bubble{},
+		Bubbles: []*b.Bubble{},
 	}
 }
 
@@ -52,17 +54,17 @@ func (fp *Fishpot) UpdateBubbles() {
 	}
 
 	// Remove bubbles that have reached the top
-	fp.Bubbles = filterBubbles(fp.Bubbles, func(bubble *Bubble) bool {
+	fp.Bubbles = filterBubbles(fp.Bubbles, func(bubble *b.Bubble) bool {
 		return bubble.VerticalPos == 0
 	})
 
 	// Randomly create new bubbles
 	if rand.Intn(10) < 2 {
-		fp.Bubbles = append(fp.Bubbles, NewBubble(fp.Width, fp.Height))
+		fp.Bubbles = append(fp.Bubbles, b.NewBubble(fp.Width, fp.Height))
 	}
 }
 
-func filterBubbles(bubbles []*Bubble, hasReachedTop func(*Bubble) bool) (remaining []*Bubble) {
+func filterBubbles(bubbles []*b.Bubble, hasReachedTop func(*b.Bubble) bool) (remaining []*b.Bubble) {
 	for _, bubble := range bubbles {
 		if !hasReachedTop(bubble) {
 			remaining = append(remaining, bubble)

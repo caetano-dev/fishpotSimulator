@@ -1,12 +1,14 @@
-package main
+package fishpot
 
 import (
+	b "fishpot_simulator/bubble"
+	f "fishpot_simulator/fish"
 	"testing"
 )
 
 func TestNewFishpot(t *testing.T) {
 	width, height := 10, 10
-	fish := []*Fish{NewFish(width, height)}
+	fish := []*f.Fish{f.NewFish(width, height)}
 	fishpot := NewFishpot(width, height, fish)
 
 	if fishpot.Width != width {
@@ -22,10 +24,10 @@ func TestNewFishpot(t *testing.T) {
 
 func TestUpdateBubbles(t *testing.T) {
 	width, height := 10, 10
-	fishpot := NewFishpot(width, height, []*Fish{})
+	fishpot := NewFishpot(width, height, []*f.Fish{})
 
 	// Add a bubble almost at the top
-	fishpot.Bubbles = append(fishpot.Bubbles, &Bubble{HorizontalPos: 0, VerticalPos: 1})
+	fishpot.Bubbles = append(fishpot.Bubbles, &b.Bubble{HorizontalPos: 0, VerticalPos: 1})
 
 	fishpot.UpdateBubbles()
 
@@ -34,7 +36,7 @@ func TestUpdateBubbles(t *testing.T) {
 	}
 
 	// Add a bubble not at the top
-	fishpot.Bubbles = append(fishpot.Bubbles, &Bubble{HorizontalPos: 0, VerticalPos: 2})
+	fishpot.Bubbles = append(fishpot.Bubbles, &b.Bubble{HorizontalPos: 0, VerticalPos: 2})
 
 	fishpot.UpdateBubbles()
 

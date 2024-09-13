@@ -1,4 +1,4 @@
-package main
+package bubble
 
 import (
 	"math/rand"
