@@ -53,7 +53,7 @@ func (fp *Fishpot) UpdateBubbles() {
 
 	// Remove bubbles that have reached the top
 	fp.Bubbles = filterBubbles(fp.Bubbles, func(bubble *Bubble) bool {
-		return bubble.VerticalPos > 0
+		return bubble.VerticalPos == 0
 	})
 
 	// Randomly create new bubbles
@@ -62,10 +62,10 @@ func (fp *Fishpot) UpdateBubbles() {
 	}
 }
 
-func filterBubbles(bubbles []*Bubble, hasReachedTop func(*Bubble) bool) (reachedTop []*Bubble) {
+func filterBubbles(bubbles []*Bubble, hasReachedTop func(*Bubble) bool) (remaining []*Bubble) {
 	for _, bubble := range bubbles {
-		if hasReachedTop(bubble) {
-			reachedTop = append(reachedTop, bubble)
+		if !hasReachedTop(bubble) {
+			remaining = append(remaining, bubble)
 		}
 	}
 	return
