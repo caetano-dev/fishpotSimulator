@@ -30,6 +30,11 @@ func NewFish(width, height int) *Fish {
 }
 
 func (f *Fish) Move() {
+	f.moveVertically()
+	f.moveHorizontally()
+}
+
+func (f *Fish) moveVertically() {
 	// Randomly move up or down
 	if rand.Intn(2) == 0 {
 		if rand.Intn(2) == 0 && f.VerticalPos > 0 {
@@ -38,35 +43,33 @@ func (f *Fish) Move() {
 			f.VerticalPos++
 		}
 	}
+}
 
-	// TODO: refactor
-	// Randomly move left or right
-	if rand.Intn(50) != 0 { // 2% chance of changing direction
-		if f.Direction == "right" {
-			if f.HorizontalPos < f.Width-len(rightFish) {
-				f.HorizontalPos++
-			} else {
-				f.Direction = "left"
-			}
+func (f *Fish) moveHorizontally() {
+	if rand.Intn(50) == 0 {
+		f.changeDirection()
+	}
+
+	//check if fish is at the edge
+	if f.Direction == "right" {
+		if f.HorizontalPos < f.Width-len(rightFish) {
+			f.HorizontalPos++
 		} else {
-			if f.HorizontalPos > 0 {
-				f.HorizontalPos--
-			} else {
-				f.Direction = "right"
-			}
+			f.Direction = "left"
 		}
 	} else {
-		if f.Direction == "right" {
-			f.Direction = "left"
+		if f.HorizontalPos > 0 {
+			f.HorizontalPos--
 		} else {
 			f.Direction = "right"
 		}
 	}
 }
 
+func (f *Fish) changeDirection() {
+	f.Direction = map[string]string{"right": "left", "left": "right"}[f.Direction]
+}
+
 func (f *Fish) GetFishString() string {
-	if f.Direction == "right" {
-		return rightFish
-	}
-	return leftFish
+	return map[string]string{"right": rightFish, "left": leftFish}[f.Direction]
 }
