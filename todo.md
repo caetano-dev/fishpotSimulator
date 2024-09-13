@@ -1,2 +1,3 @@
+- add more elements to the fishpot (rocks, seaweed, etc...)
 - somehow add commands for user to feed the fish
 - make fish grow bigger when fed
