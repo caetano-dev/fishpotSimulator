@@ -1,4 +1,3 @@
-- put more fish appearing at random locations
 - bubble animations
 - somehow add commands for user to feed the fish
 - make fish grow bigger when fed

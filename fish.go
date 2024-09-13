@@ -39,16 +39,25 @@ func (f *Fish) Move() {
 		}
 	}
 
+	// TODO: refactor
 	// Randomly move left or right
-	if f.Direction == "right" {
-		if f.HorizontalPos < f.Width-len(rightFish) {
-			f.HorizontalPos++
+	if rand.Intn(50) != 0 { // 2% chance of changing direction
+		if f.Direction == "right" {
+			if f.HorizontalPos < f.Width-len(rightFish) {
+				f.HorizontalPos++
+			} else {
+				f.Direction = "left"
+			}
 		} else {
-			f.Direction = "left"
+			if f.HorizontalPos > 0 {
+				f.HorizontalPos--
+			} else {
+				f.Direction = "right"
+			}
 		}
 	} else {
-		if f.HorizontalPos > 0 {
-			f.HorizontalPos--
+		if f.Direction == "right" {
+			f.Direction = "left"
 		} else {
 			f.Direction = "right"
 		}

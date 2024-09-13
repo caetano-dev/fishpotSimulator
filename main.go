@@ -35,5 +35,6 @@ func main() {
 		for _, fish := range fish {
 			fish.Move()
 		}
+		fishpot.Update()
 	}
 }
