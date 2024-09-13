@@ -31,7 +31,7 @@ func main() {
 	for {
 		fishpot.FlushTerminal()
 		fishpot.Draw()
-		time.Sleep(20 * time.Millisecond)
+		time.Sleep(300 * time.Millisecond)
 		for _, fish := range fish {
 			fish.Move()
 		}
