@@ -4,6 +4,8 @@
 
 Fishpot Simulator is a terminal-based simulation written in Go that mimics a fishpot with moving fish and bubbles. The fish move horizontally and vertically within the terminal window, and bubbles rise from the bottom to the top of the screen.
 
+![Fishpot Simulator](./.github/screenshot.png)
+
 ## Project Structure
 
 The project is organized into the following packages:
